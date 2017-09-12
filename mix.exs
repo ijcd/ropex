@@ -8,6 +8,8 @@ defmodule Rope.Mixfile do
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
       deps: deps(),
+      description: description(),
+      package: package(),
 
       # Docs
       name: "ropex",
@@ -25,11 +27,27 @@ defmodule Rope.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:apex, "~>1.0.0"},
+      # dev
+      {:ex_doc, ">= 0.0.0", only: :dev},
+      {:apex, "~>1.0.0", only: :dev, runtime: false},
+
+      # testing
       {:mix_test_watch, "~> 0.3", only: :dev, runtime: false},
-      {:credo, "~> 0.8.5"},
+      {:credo, "~> 0.8.5", only: :dev, runtime: false},
       {:dialyxir, "~> 0.5", only: [:dev, :test], runtime: false},
-      # {:stream_data, "~> 0.2.0"},
+    ]
+  end
+
+  defp description() do
+    "Elixir implementation of a persistent Rope datastructure."
+  end
+
+  defp package() do
+    [
+      name: "ropex",
+      maintainers: ["Ian Duggan"],
+      licenses: ["Apache 2.0"],
+      links: %{"GitHub" => "https://github.com/ijcd/ropex"}
     ]
   end
 end
